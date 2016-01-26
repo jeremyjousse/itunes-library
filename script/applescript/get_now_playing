@@ -1,0 +1,14 @@
+global addenda
+tell application "iTunes"
+	if player state is not stopped then
+		set ofi to fixed indexing
+		set fixed indexing to true
+		try
+			set dbid to persistent ID of current track
+			set cla to class of current track
+		end try
+
+		set fixed indexing to ofi
+		return dbid
+	end if
+end tell

@@ -1,0 +1,5 @@
+tell application "iTunes"
+	fast forward
+	delay 2
+	resume
+end tell

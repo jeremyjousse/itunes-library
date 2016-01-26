@@ -1,0 +1,19 @@
+.container
+ .row
+  .col-md-12
+   .panel.panel-default
+    .panel-heading
+     %h2 Import a File
+    .panel-body
+     = @file_to_import.filename
+     %br
+     %br
+     = simple_form_for @file_to_import, :html => { :class => 'form-horizontal', :multipart => true }, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' } } do |f|
+      = f.input :filename, :as => :hidden
+      = f.input :artist, :wrapper => :prepend, :label => false do
+       = content_tag :span, "Artist", :class => "input-group-addon"
+       = f.input_field :artist
+      = f.input :title, :wrapper => :prepend, :label => false do
+       = content_tag :span, "Title", :class => "input-group-addon"
+       = f.input_field :title
+      = f.button :submit

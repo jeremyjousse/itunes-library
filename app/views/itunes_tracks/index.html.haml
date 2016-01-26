@@ -1,0 +1,68 @@
+.container
+	.row
+		.col-md-12
+			.panel.panel-default
+				.panel-body
+					.div_action.row
+						.col-md-4
+						.col-md-4.text-center
+							%span
+								= pluralize(@total_items_selected, 'Mp3 Track')+' selected / '+@total_items.to_s
+						.col-md-4.text-right
+							.btn-group
+								= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus") + ' Update References', update_waiting_references_itunes_tracks_path, :class=>'btn btn-default'
+								%button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+									%span.caret
+									%span.sr-only Toggle Dropdown
+								%ul.dropdown-menu
+									%li
+										=link_to(content_tag(:i, nil, class: "glyphicon glyphicon-refresh") + " Easy Complet", easy_complet_itunes_tracks_path, id: "bt_easy_update")
+									%li
+										=link_to(content_tag(:i, nil, class: "glyphicon glyphicon-refresh") + " Update all ratings", "javascript:void(0);", id: "bt_update_all_ratings", data: {action: update_all_ratings_path})
+					.col-md-12.text-center
+						= will_paginate @itunes_tracks, class: '', next_label: 'Next', previous_label: 'Previous'
+					= search_form_for @q do |f|
+						%table.table.table-striped.table-bordered.table-hover.table-condensed
+							%tr
+								%th
+								%th Artist
+								%th Track
+								%th Album
+								%th Genre
+								%th Year
+								%th Rating
+								%th State
+								%th Searched
+								%th
+							%tr
+								%td
+								%td #{f.text_field :artist_cont, :class => "form-control input-sm"}
+								%td #{f.text_field :name_cont, :class => "form-control input-sm"}
+								%td #{f.text_field :album_cont, :class => "form-control input-sm"}
+								%td #{f.text_field :genre_cont, :class => "form-control input-sm"}
+								%th #{f.text_field :year_eq, :class => "form-control input-sm"}
+								%td #{f.text_field :rating_gt, :class => "form-control input-sm"}
+								- search_values_hash = {'All' => ''}
+								- search_values_hash.merge!(ItunesTrack.states)
+								%td #{f.select :state_eq, search_values_hash}
+								- search_values_hash = {'All' => ''}
+								- search_values_hash.merge!(ItunesTrack.searcheds)
+								%td #{f.select :searched_eq, search_values_hash, :class => "form-control input-sm"}
+								%td
+									=f.submit 'F', class: 'btn btn-default btn-xs'
+									-# = content_tag(:span, "", class: "glyphicon glyphicon-filter")
+									=link_to  content_tag(:span, "", class: "glyphicon glyphicon-remove"), itunes_tracks_path(:locale => I18n.locale,:filter => 'reset'),  :class => 'btn btn-default btn-xs'
+							- @itunes_tracks.each do |itunes_track|
+								%tr
+									%td
+									%td #{itunes_track.artist}
+									%td #{itunes_track.name}
+									%td #{itunes_track.album}
+									%td #{itunes_track.genre}
+									%td #{itunes_track.year}
+									%td
+										-# .static_rating{data: {rating: itunes_track.rating}}
+									%td #{itunes_track.state}
+									%td #{itunes_track.searched}
+									%td
+										=link_to content_tag(:span, "", class: "glyphicon glyphicon-pencil") + ' Edit', edit_itunes_track_path(itunes_track),class: "btn btn-default btn-sm"

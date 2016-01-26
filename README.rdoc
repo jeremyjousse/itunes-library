@@ -1,0 +1,16 @@
+Ajouter le scan du top 50 residentadvisor
+http://www.residentadvisor.net/dj-charts.aspx?top=50
+http://www.residentadvisor.net/dj-charts.aspx?top=50&mn=8&yr=2014
+
+http://www.myfreemp3.biz/
+http://www.mp3.vet/
+
+
+Consumer Key	HAPVWmkdQhBPsSjzOIUS
+Consumer Secret	GVDLlTaHWecADkudYQrVSUIbPOMGLjGp
+Demander l'URL du Token	https://api.discogs.com/oauth/request_token
+Autoriser l'URL	https://www.discogs.com/oauth/authorize
+URL de jeton de requête	https://api.discogs.com/oauth/access_token
+
+curl -i "https://api.discogs.com/database/search?q=Nirvana&key=HAPVWmkdQhBPsSjzOIUS&secret=GVDLlTaHWecADkudYQrVSUIbPOMGLjGp"  --user-agent "FooBarApp/3.0"
+curl -i https://api.discogs.com/releases/249504 --user-agent "FooBarApp/3.0"

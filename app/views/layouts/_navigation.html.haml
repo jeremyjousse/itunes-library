@@ -1,0 +1,25 @@
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header.navbar-fixed-top
+      .container
+        =link_to "iTunes Library", "#", class: "navbar-brand"
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              =link_to "iTunes tracks", itunes_tracks_path
+            %li
+              =link_to "Wanted", wanted_tracks_path
+            %li
+              =link_to "Import", mp3_importers_path
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-search") + " Now Playing", edit_now_playing_itunes_tracks_path)
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-fast-backward"), "javascript:void(0);", id: "bt-previous", data: {action: itunes_previous_path})
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-play"), "javascript:void(0);", id: "bt-play", data: {action: itunes_play_path})
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-fast-forward"), "javascript:void(0);", id: "bt-next", data: {action: itunes_next_path})
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-refresh") + " Update library", "javascript:void(0);", id: "bt_update_library", data: {action: update_library_path})
+            %li
+              =link_to(content_tag(:i, nil, class: "glyphicon glyphicon-cog"), "javascript:void(0);")

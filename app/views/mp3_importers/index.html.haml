@@ -1,0 +1,38 @@
+.container
+	.row
+		.col-md-12
+			.panel.panel-default
+				.panel-heading
+					%h2 Mp3 Tracks to import
+				.panel-body
+					.div_action.row
+						.col-md-4
+						.col-md-4.text-center
+							%span
+								= pluralize(@files_to_import.count, 'Mp3 Track')+' to import'
+						.col-md-4.text-right
+							-#= link_to content_tag(:span, "", class: "glyphicon glyphicon-import") + ' Import Patients', new_import_patients_path, :class=>'btn btn-default'
+							-#= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus") + ' New Patient', new_patient_path, :class=>'btn btn-default'
+					.col-md-12
+						%ul.mp3_importers
+							- @files_to_import.each do |file_to_import|
+								%li
+									= link_to file_to_import.filename ,'/mp3_importers/' + url_encode(file_to_import.filename)+'/edit', class: 'full_block'
+						-#= will_paginate @patients, class: '', next_label: 'Next', previous_label: 'Previous'
+						-#= paginate @itunes_tracks
+					-# %table.table.table-striped.table-bordered.table-hover.table-condensed
+					-# 	%tr
+					-# 		%th File
+					-# 		%th Artist
+					-# 		%th Name
+					-# 		%th Time
+					-# 	- @files_to_import.each do |file_to_import|
+					-# 		%tr
+					-# 			%td
+					-# 				= link_to file_to_import.filename ,'/mp3_importers/' + url_encode(file_to_import.filename)+'/edit', class: 'full_block'
+					-# 			%td
+					-# 				=file_to_import.artist
+					-# 			%td
+					-# 				=file_to_import.title
+					-# 			%td
+					-# 				=file_to_import.time

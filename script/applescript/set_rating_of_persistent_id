@@ -1,0 +1,7 @@
+on run (arguments)
+	tell application "iTunes"
+		try
+			set rating of (first track of library playlist 1 whose persistent ID is (first item of arguments))  to (second item of arguments)
+		end try
+	end tell
+end run

@@ -1,0 +1,90 @@
+.container
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          %h2 Edit an iTunes Track
+        .panel-body
+          .row
+            .col-md-12.text-right
+              = link_to content_tag(:span, "", class: "glyphicon glyphicon-chevron-left") + 'Back', itunes_tracks_path, :class => 'btn btn-default'
+            .col-md-5
+              = simple_form_for @itunes_track, :html => { :class => 'form-horizontal', :multipart => true }, :defaults => { :wrapper_html => {:class => 'form-group'}, :input_html => { :class => 'form-control' } } do |f|
+                = f.error_notification
+                .form-inputs
+                  .col-md-12.text-right
+                    %br
+                      .form-buttons
+                        = f.button :submit, :class => 'btn btn-default'
+                    %fieldset
+                      = f.input :artist, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Artist", :class => "input-group-addon"
+                        = f.input_field :artist, value: @mp3.id3tags[:artist].to_s, class: 'form-control input-sm'
+                      = f.input :name, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Name", :class => "input-group-addon"
+                        = f.input_field :name, value: @mp3.id3tags[:title].to_s, class: 'form-control input-sm'
+                      = f.input :album, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Album", :class => "input-group-addon"
+                        = f.input_field :album, value: @mp3.id3tags[:album].to_s, class: 'form-control input-sm'
+                      = f.input :publisher, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Publisher", :class => "input-group-addon"
+                        = f.input_field :publisher, value: @mp3.id3tags[:publisher].to_s, class: 'form-control input-sm'
+                      = f.input :year, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Year", :class => "input-group-addon"
+                        - year = (@mp3.id3tags[:year].to_s == '') ? @itunes_track.year.to_s : @mp3.id3tags[:year].to_s
+                        = @mp3.id3tags[:year].to_s
+                        = f.input_field :year, value: year, class: 'form-control input-sm'
+                      = f.input :release_date, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Relase Date", :class => "input-group-addon"
+                        = f.input_field :release_date, value: @mp3.id3tags[:release_date].to_s, class: 'form-control input-sm', as: :string
+                      = f.input :genre, :wrapper => :prepend, :label => false do
+                        = content_tag :span, "Genre", :class => "input-group-addon"
+                        = f.input_field :genre, value: @mp3.id3tags[:genre].to_s, as: :select, collection: JSON.parse(ENV["ITUNES_TRACK_GENRES"])
+                      .col-md-5
+                        = f.input :track_number, :wrapper => :prepend, :label => false do
+                          = content_tag :span, "Track", :class => "input-group-addon"
+                          = f.input_field :track_number, class: 'form-control input-sm'
+                      .col-md-1
+                        #{"/"}
+                      .col-md-5
+                        = f.input_field :track_count, class: 'form-control input-sm'
+                      .col-md-12
+                        %div#rating{data: {rating: @itunes_track.rating, post:{url: rate_itunes_track_path(@itunes_track)}}}
+
+                        Rating #{@itunes_track.rating}
+                        %br
+
+                        =Time.at(@mp3.audio_properties[:length]).utc.strftime("%M:%S")
+                        %br
+                        =@mp3.id3tags[:release_date].to_s
+            .col-md-3
+              = simple_form_for @itunes_track, :url => itunes_track_update_cover_path(@itunes_track), :remote => true, :authenticity_token => true, :html => { :class => 'form-horizontal', :multipart => true } do |f2|
+                = f2.error_notification
+                .form-inputs
+                  %br
+                  .form-buttons
+                    = f2.button :submit, :class => 'btn btn-default'
+                  %br
+                  .col-md-12
+                    = image_tag itunes_track_show_cover_path(@itunes_track), id: 'cover', width: '250'
+                    %fieldset
+                      = f2.input :cover
+            .col-md-4
+              %br
+              %br
+              .pre-scrollable
+                - @reference_tracks.each do |reference_track|
+                  %div{class: reference_track_has_year(reference_track)}
+                    = button_to "#{reference_track.reference_artists.first.name} - #{reference_track.name}", itunes_track_easy_update_path(@itunes_track, params: {reference_track_id: reference_track.id}), :url => { :controller => "itunes_tracks", :action => "easy_update"}, :method => :post, class: 'btn btn-default'
+                    #{reference_track.reference_album.name} - #{reference_track.reference_album.year} (#{reference_track.reference_album.reference_label.name})
+                    - if reference_track.duration.present?
+                      #{Time.at(reference_track.duration).utc.strftime("%M:%S")}
+                    %br
+                    - if reference_track.reference_album.reference_album_covers.count > 0
+                      = image_tag(reference_track.reference_album.reference_album_covers.first.cover, width: '250')
+                    %br
+                    %br
+.container
+  .row
+    .col-md-12
+      = link_to 'Next', itunes_track_easy_update_skeep_path(@itunes_track)

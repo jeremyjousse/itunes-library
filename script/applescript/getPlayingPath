@@ -1,0 +1,16 @@
+global addenda
+tell application "iTunes"
+	if player state is not stopped then
+		set ofi to fixed indexing
+		set fixed indexing to true
+		try
+			set dbid to persistent ID of current track
+			set songLocation to get location of current track
+			set sLocation to POSIX path of (songLocation as text)
+			set cla to class of current track
+		end try
+
+		set fixed indexing to ofi
+		return sLocation
+	end if
+end tell

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @wanted_track.artist %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @wanted_track.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @wanted_track.status %>
+</p>
+
+<p>
+  <strong>Searched:</strong>
+  <%= @wanted_track.searched %>
+</p>
+
+<%= link_to 'Edit', edit_wanted_track_path(@wanted_track) %> |
+<%= link_to 'Back', wanted_tracks_path %>

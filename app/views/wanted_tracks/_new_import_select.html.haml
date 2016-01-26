@@ -1,0 +1,5 @@
+= simple_form_for(@import,url: new_import_add_wanted_tracks_path, method: 'post', remote: true) do |f|
+ -# @tracks.each do |track|
+ = f.input_field :tracks,  collection: @tracks, as: :check_boxes, value_method: lambda {|track| "#{URI.encode(track.to_json)}" }, label_method: lambda {|track| "#{track[:artist]} - #{track[:title]}" }, :checked => @tracks_checked
+ -#= f.collection_check_boxes :tracks, [[true, 'Yes'] ,[false, 'N']], :first, :last
+ -#, prompt: "prompt", as: :check_boxes, :checked => @tracks, label_method: lambda { |track| "#{track[:artist]} - #{pbc[:title]}" }, value_method: lambda { |track| "#{track[:artist]} - #{pbc[:title]}" }

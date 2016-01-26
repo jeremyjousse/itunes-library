@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @itunes_track.name %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @itunes_track.artist %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @itunes_track.album %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @itunes_track.genre %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @itunes_track.size %>
+</p>
+
+<p>
+  <strong>Total time:</strong>
+  <%= @itunes_track.total_time %>
+</p>
+
+<p>
+  <strong>Track number:</strong>
+  <%= @itunes_track.track_number %>
+</p>
+
+<p>
+  <strong>Track count:</strong>
+  <%= @itunes_track.track_count %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @itunes_track.year %>
+</p>
+
+<p>
+  <strong>Bit rate:</strong>
+  <%= @itunes_track.bit_rate %>
+</p>
+
+<p>
+  <strong>Sample rate:</strong>
+  <%= @itunes_track.sample_rate %>
+</p>
+
+<p>
+  <strong>Artwork count:</strong>
+  <%= @itunes_track.artwork_count %>
+</p>
+
+<p>
+  <strong>Persistent:</strong>
+  <%= @itunes_track.persistent_id %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @itunes_track.location %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @itunes_track.cover.url %>
+</p>
+
+<%= link_to 'Edit', edit_itunes_track_path(@itunes_track) %> |
+<%= link_to 'Back', itunes_tracks_path %>

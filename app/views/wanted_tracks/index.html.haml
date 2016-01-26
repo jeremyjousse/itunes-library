@@ -1,0 +1,67 @@
+.container
+	.row
+		.col-md-12
+			.panel.panel-default
+				.panel-heading
+					%h2 Wanted Tracks
+				.panel-body
+					.div_action.row
+						.col-md-4
+						.col-md-4.text-center
+							%span
+								= pluralize(@total_items_selected, 'Wanted Track')+' selected / '+@total_items.to_s
+						.col-md-4.text-right
+							.btn-group
+								= link_to 'New listing', new_listing_wanted_tracks_path(),  {:class=>'btn btn-default', :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#ajax_modal', 'data-url' => new_listing_wanted_tracks_path()}
+								%button.btn.btn-default.dropdown-toggle{type: 'button', data: {toggle: 'dropdown'}, aria: {expanded: 'false'}}
+									%span.caret
+									%span.sr-only
+										Toggle Dropdown
+								%ul.dropdown-menu{role: 'menu'}
+									%li
+										= link_to 'Import Juno Chart', new_import_wanted_tracks_path(),  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#ajax_modal', 'data-url' => new_import_wanted_tracks_path()}
+									%li
+										= link_to 'Update MyFreeMp3', update_wanted_tracks_found_in_myfreemp3_wanted_tracks_path(),  {remote: true, method: :patch}
+									%li
+										= link_to 'Purge', purge_wanted_tracks_path(),  {method: :patch}
+									%li
+										= link_to 'Re search', update_wanted_tracks_found_in_myfreemp3_wanted_tracks_path(),  {method: :patch}
+
+
+					.col-md-12.text-center
+						-#= will_paginate @patients, class: '', next_label: 'Next', previous_label: 'Previous'
+						= will_paginate @wanted_tracks, class: '', next_label: 'Next', previous_label: 'Previous'
+					= search_form_for @search do |f|
+						%table.table.table-striped.table-bordered.table-hover.table-condensed
+							%tr
+								%th Artist
+								%th Track
+								%th Status
+								%th Found
+								%th Searched
+								%th In library
+								%th
+								%th
+							%tr
+								%td #{f.text_field :artist_cont, :class => "form-control input-sm"}
+								%td #{f.text_field :title_cont, :class => "form-control input-sm"}
+								%td #{f.select :status_eq, WantedTrack.statuses, :class => "form-control input-sm"}
+								%td #{f.text_field :found_in_myfreemp3_gteq, :class => "form-control input-sm"}
+								%td
+								%td
+								%td #{f.submit 'Filter', class: 'btn btn-default btn-xs'} #{link_to  content_tag(:span, "", class: "glyphicon glyphicon-remove") + ' Reset', wanted_tracks_path(:locale => I18n.locale,:filter => 'reset'),  :class => 'btn btn-default btn-xs'}
+							- @wanted_tracks.each do |wanted_track|
+								%tr{id: 'wanted_track_' + wanted_track.id.to_s, class: "#{wanted_track.searched == 1 ? 'searched' : ''}"}
+									%td #{wanted_track.artist}
+									%td #{wanted_track.title}
+									%td #{wanted_track.status}
+									%td #{wanted_track.found_in_myfreemp3}
+									%td #{wanted_track.searched}
+									%td #{wanted_track.is_in_library}
+									%td
+										=link_to( image_tag("download_sites/myfreemp3.png"), 'javascript:;', class: 'search_download_file', data: {url: wanted_track_search_file_path(wanted_track, download_site: 'myfreemp3')})
+										=image_tag("download_sites/zippyshare.png")
+										=link_to(image_tag("download_sites/google.png"), 'http://www.google.com/search?q=' + u(wanted_track.artist) + '+' + u(wanted_track.title), target: "_blank")
+									%td
+										=link_to content_tag(:span, "", class: "glyphicon glyphicon-ok") + ' Found', wanted_track_set_found_path(wanted_track),class: "btn btn-success btn-sm"
+										=link_to content_tag(:span, "", class: "glyphicon glyphicon-trash") + ' Cancel', wanted_track_set_found_path(wanted_track),class: "btn btn-danger btn-sm"

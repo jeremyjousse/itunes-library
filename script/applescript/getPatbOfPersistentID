@@ -1,0 +1,15 @@
+global addenda
+on run (arguments)
+	tell application "iTunes"
+			set ofi to fixed indexing
+			set fixed indexing to true
+			try
+				set songLocation to get location of some track of library playlist 1 whose persistent ID is (first item of arguments)
+				set sLocation to POSIX path of (songLocation as text)
+				set cla to class of current track
+			end try
+			
+			set fixed indexing to ofi
+			return sLocation
+	end tell
+end run

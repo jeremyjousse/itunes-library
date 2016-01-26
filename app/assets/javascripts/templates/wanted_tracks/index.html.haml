@@ -1,0 +1,7 @@
+yop
+%section.row{ng: {if: 'WantedTracks'}}
+  %h1.text-center
+    Results
+  %ul.list-unstyled
+    %li{ng: {repeat: "WantedTrack in WantedTracks"}}
+      '----' + {{WantedTrack.artist}}

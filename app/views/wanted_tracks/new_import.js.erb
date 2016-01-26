@@ -1,0 +1,6 @@
+$(".modal-body-content").html("<%= escape_javascript(render 'wanted_tracks/new_import' ) %>");
+$(".modal-title").html("Import Chart");
+$(".modal-footer").html("<%= escape_javascript(render 'wanted_tracks/new_import_buttons' ) %>");
+$('#new_import_form_submiter').bind( "click", function() {
+  $('#new_juno_playlist').submit();
+});

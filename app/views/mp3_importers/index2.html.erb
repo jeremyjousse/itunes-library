@@ -1,0 +1,16 @@
+
+<table>
+<% @files_to_import.each do |file_to_import| %>
+<tr>
+<td>
+	<a href="/mp3_importers/<%= url_encode(file_to_import.filename)%>/edit"><%= file_to_import.filename%></a>
+	</td>
+	<td>
+<%= file_to_import.artist%>
+	</td>
+	<td>
+<%= file_to_import.title%>
+</td>
+</tr>
+<% end %>
+<table>

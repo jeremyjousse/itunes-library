@@ -1,0 +1,9 @@
+<%= @file_to_import.filename %>
+<%= simple_form_for @file_to_import do |f| %>
+  <%= f.input :filename, :as => :hidden %>
+  <%= f.input :artist %>
+  <%= f.input :title %>
+<%= f.button :submit %>
+<% end %>
+
+<%=@file_to_import.inspect%>

@@ -1,0 +1,6 @@
+$(".modal-body-content").html("<%= escape_javascript(render 'wanted_tracks/new_listing' ) %>");
+$(".modal-title").html("New listing");
+$(".modal-footer").html("<%= escape_javascript(render 'wanted_tracks/new_import_buttons' ) %>");
+$('#new_import_form_submiter').bind( "click", function() {
+  $('#new_listing_form').submit();
+});
