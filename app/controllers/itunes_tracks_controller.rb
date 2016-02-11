@@ -62,7 +62,7 @@ class ItunesTracksController < ApplicationController
   end
 
   def edit_now_playing
-    persistent_id = ItunesTrack.get_now_playing
+    persistent_id = ItunesTrack.now_playing
     respond_to do |format|
       if !persistent_id.nil?
         @itunes_track = ItunesTrack.find_by_persistent_id(persistent_id.strip)

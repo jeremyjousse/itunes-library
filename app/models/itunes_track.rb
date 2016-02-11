@@ -32,7 +32,7 @@ class ItunesTrack < ActiveRecord::Base
   end
 
   def get_rating_from_itunes
-    @rating = ApplescriptWraper.get_rating_of_persistent_id(persistent_id)
+    @rating = ApplescriptWrapper.get_rating_of_persistent_id(persistent_id)
     self.rating = @rating
     save
 
@@ -40,7 +40,7 @@ class ItunesTrack < ActiveRecord::Base
   end
 
   def set_rating(rating)
-    ApplescriptWraper.set_rating_of_persistent_id(persistent_id, rating)
+    ApplescriptWrapper.set_rating_of_persistent_id(persistent_id, rating)
     self.rating = rating
     save
   end
@@ -48,14 +48,14 @@ class ItunesTrack < ActiveRecord::Base
   def self.update_missing_rating
     itunes_tracks = ItunesTrack.where(rating: 0).order(id: :desc)
     itunes_tracks.each do |itunes_track|
-      itunes_track.rating = ApplescriptWraper
+      itunes_track.rating = ApplescriptWrapper
         .get_rating_of_persistent_id(itunes_track.persistent_id)
       itunes_track.save
     end
   end
 
-  def self.get_now_playing
-    ApplescriptWraper.get_now_playing
+  def self.now_playing
+    ApplescriptWrapper.now_playing
   end
 
   def self.update_missing_informations
@@ -81,7 +81,7 @@ class ItunesTrack < ActiveRecord::Base
 
     missing_informations_itunes_tracks = ItunesTrack.no_rating
     missing_informations_itunes_tracks.each do |itunes_track|
-      itunes_track.rating = ApplescriptWraper.get_rating_of_persistent_id(itunes_track.persistent_id)
+      itunes_track.rating = ApplescriptWrapper.get_rating_of_persistent_id(itunes_track.persistent_id)
       itunes_track.save
     end
   end
@@ -137,7 +137,7 @@ class ItunesTrack < ActiveRecord::Base
         end
       end
 
-      new_path = ApplescriptWraper.get_path_of_persistent_id(self.persistent_id)
+      new_path = ApplescriptWrapper.get_path_of_persistent_id(self.persistent_id)
       self.location = ItunesTrack::translate_path_of_persistent_id_file_location(new_path) unless new_path.nil?
       save
   end
@@ -148,7 +148,7 @@ class ItunesTrack < ActiveRecord::Base
   end
 
   def update_file_path
-    new_path = ApplescriptWraper.get_path_of_persistent_id(self.persistent_id)
+    new_path = ApplescriptWrapper.get_path_of_persistent_id(self.persistent_id)
     if !new_path.nil? && self.location != ItunesTrack::translate_path_of_persistent_id_file_location(new_path)
       self.location = ItunesTrack::translate_path_of_persistent_id_file_location(new_path) unless new_path.nil?
       save
