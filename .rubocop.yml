@@ -3,7 +3,8 @@ AllCops:
     - config/unicorn.rb
     - db/**/*
     - '**/Guardfile'
-  RunRailsCops: true
+  Rails:
+    Enabled: true
 
 Metrics/LineLength:
   Max: 180
