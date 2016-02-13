@@ -198,19 +198,12 @@ class ItunesTrack < ActiveRecord::Base
   private
 
   def update_state
-    if name.nil? ||
-      artist.nil? ||
-      album.nil? ||
-      genre.nil? ||
-      track_number.nil? ||
-      track_count.nil? ||
-      year.nil? ||
-      publisher.nil? ||
-      cover.nil? ||
-      release_date.nil?
-      self.state = 'Updated'
-    else
-      self.state = 'Completed'
+    [name, artist, album, genre, track_number, track_count, year, publisher, cover, release_date].each do |param|
+      if param.nil?
+        self.state = 'Updated'
+        return state
+      end
     end
+    self.state = 'Completed'
   end
 end
