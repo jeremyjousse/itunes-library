@@ -5,7 +5,7 @@ This app aims to help you manange your iTunes files' ID3tags.
 
 [![Code Climate](https://codeclimate.com/github/jeremyjousse/itunes-library/badges/gpa.svg)](https://codeclimate.com/github/jeremyjousse/itunes-library)
 
-[![Test Coverage](https://codeclimate.com/github/jeremyjousse/itunes-library/badges/coverage.svg)](https://codeclimate.com/github/jeremyjousse/itunes-library)
+[![codecov.io](https://codecov.io/github/jeremyjousse/itunes-library/coverage.svg?branch=master)](https://codecov.io/github/jeremyjousse/itunes-library?branch=master)
 
 [![security](https://hakiri.io/github/jeremyjousse/itunes-library/master.svg)](https://hakiri.io/github/jeremyjousse/itunes-library/master)
 
