@@ -14,6 +14,3 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - mysql -e 'create database itunes_library_test;'
 bundler_args: --binstubs=./bundler_stubs
-addons:
-    code_climate:
-        repo_token: 16fb57539127cfe4164fc0481661731997e3da3794d3882585daabcf6a127052
