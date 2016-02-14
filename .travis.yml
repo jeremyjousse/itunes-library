@@ -1,8 +1,19 @@
 language: ruby
 rvm:
   - 2.3.0
+env:
+  - DB=mysql
+  - RAILS_ENV=test
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y libtag1-dev
 script:
-  - bundle exec rspec
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - RAILS_ENV=test bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rspec spec/
+services:
+  - mysql
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - mysql -e 'create database itunes_library_test;'
+bundler_args: --binstubs=./bundler_stubs
