@@ -149,7 +149,7 @@ group :test do
   gem 'turnip'
   gem 'webmock'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'codecov', require: false
 end
 
 group :doc do
