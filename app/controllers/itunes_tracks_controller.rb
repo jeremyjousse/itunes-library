@@ -1,5 +1,5 @@
 class ItunesTracksController < ApplicationController
-  before_action :set_itunes_track, only: [:show, :edit, :update, :destroy]
+  before_action :load_itunes_track, only: [:show, :edit, :update, :destroy]
 
   def index
     params[:per_page] = 10 if params[:per_page].nil?
@@ -45,12 +45,10 @@ class ItunesTracksController < ApplicationController
     end
   end
 
-  # GET /itunes_tracks/new
   def new
     @itunes_track = ItunesTrack.new
   end
 
-  # GET /itunes_tracks/1/edit
   def edit
     @itunes_track = ItunesTrack.find(params[:id])
     @itunes_track.update_file_path
@@ -74,37 +72,28 @@ class ItunesTracksController < ApplicationController
     end
   end
 
-  # POST /itunes_tracks
-  # POST /itunes_tracks.json
   def create
     @itunes_track = ItunesTrack.new(itunes_track_params)
 
     respond_to do |format|
       if @itunes_track.save
-
         @itunes_track.update_tags_and_path
 
         format.html { redirect_to itunes_tracks_path, notice: 'Itunes track was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @itunes_track }
       else
         format.html { render action: 'new' }
-        format.json { render json: @itunes_track.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /itunes_tracks/1
-  # PATCH/PUT /itunes_tracks/1.json
   def update
     respond_to do |format|
       if @itunes_track.update(itunes_track_params)
         @itunes_track.update_tags_and_path
 
         format.html { redirect_to edit_itunes_track_path(@itunes_track), notice: 'Itunes track was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @itunes_track.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -132,7 +121,6 @@ class ItunesTracksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to edit_itunes_track_path(@itunes_track), notice: 'Itunes track was successfully updated.' }
-      format.json { head :no_content }
     end
   end
 
@@ -140,21 +128,20 @@ class ItunesTracksController < ApplicationController
     @itunes_track = ItunesTrack.find(params[:itunes_track_id])
     reference_track = ReferenceTrack.find(params[:reference_track_id])
 
-    if !reference_track.id.nil?
+    unless reference_track.id.nil?
       artist_string = ''
       reference_track.reference_artists.each do |artist|
-        artist_string = artist_string + ', ' unless artist_string == ''
-        artist_string = artist_string + artist.name.gsub(/(\w+)/) {|s| s.capitalize}
+        artist_string += ', ' unless artist_string == ''
+        artist_string += artist.name.gsub(/(\w+)/, &:upcase)
       end
-      update_hash = {artist: artist_string,name: reference_track.name, album: reference_track.reference_album.name, year: reference_track.reference_album.year, publisher: reference_track.reference_album.reference_label.name, track_number: reference_track.track_position, track_count: reference_track.reference_album.track_number,
+      update_hash = {artist: artist_string, name: reference_track.name, album: reference_track.reference_album.name, year: reference_track.reference_album.year, publisher: reference_track.reference_album.reference_label.name, track_number: reference_track.track_position, track_count: reference_track.reference_album.track_number,
         release_date: reference_track.reference_album.release_date}
       @itunes_track.update(update_hash)
 
       @itunes_track.update_tags_and_path
     end
     respond_to do |format|
-        format.html { redirect_to edit_itunes_track_path(@itunes_track), notice: 'Itunes track was successfully updated.' }
-        format.json { head :no_content }
+      format.html { redirect_to edit_itunes_track_path(@itunes_track), notice: 'Itunes track was successfully updated.' }
     end
   end
 
@@ -170,7 +157,6 @@ class ItunesTracksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to edit_itunes_track_path(@itunes_track), notice: 'Itunes track was successfully updated.' }
-      format.json { head :no_content }
     end
   end
 
@@ -181,7 +167,7 @@ class ItunesTracksController < ApplicationController
 
   def easy_complet
     @itunes_track = ItunesTrack.easy_updatable.limit(1)
-                    .order(created_at: :desc).first
+                               .order(created_at: :desc).first
     @itunes_track.update_file_path
     @itunes_track.get_rating_from_itunes
 
@@ -219,10 +205,8 @@ class ItunesTracksController < ApplicationController
       @itunes_track = ItunesTrack.find(params[:itunes_track_id])
       if @itunes_track.update(searched: 3)
         format.html { redirect_to easy_complet_itunes_tracks_path, notice: 'Itunes track was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'easy_complet' }
-        format.json { render json: @itunes_track.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -237,20 +221,19 @@ class ItunesTracksController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_itunes_track
-      @itunes_track = ItunesTrack.find(params[:id])
-    end
+  def load_itunes_track
+    @itunes_track = ItunesTrack.find(params[:id])
+  end
 
-    def itunes_track_params
-      params.require(:itunes_track).permit(:name, :artist, :album, :genre, :size, :total_time, :track_number, :track_count, :year, :publisher, :release_date)
-    end
+  def itunes_track_params
+    params.require(:itunes_track).permit(:name, :artist, :album, :genre, :size, :total_time, :track_number, :track_count, :year, :publisher, :release_date)
+  end
 
-    def itunes_track_update_cover_params
-      params.require(:itunes_track).permit(:cover)
-    end
+  def itunes_track_update_cover_params
+    params.require(:itunes_track).permit(:cover)
+  end
 
-    def itunes_track_rating_params
-      params.require(:itunes_track).permit(:rating)
-    end
+  def itunes_track_rating_params
+    params.require(:itunes_track).permit(:rating)
+  end
 end
