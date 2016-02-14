@@ -41,7 +41,7 @@ GEM
     addressable (2.4.0)
     arel (6.0.3)
     ast (2.2.0)
-    autoprefixer-rails (6.3.2)
+    autoprefixer-rails (6.3.3)
       execjs
       json
     better_errors (2.1.1)
@@ -188,9 +188,9 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    jbuilder (1.5.3)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
+    jbuilder (2.4.1)
+      activesupport (>= 3.0.0, < 5.1)
+      multi_json (~> 1.2)
     jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -223,7 +223,7 @@ GEM
     minitest (5.8.4)
     multi_json (1.11.2)
     multi_xml (0.5.5)
-    mysql2 (0.3.20)
+    mysql2 (0.4.2)
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -233,7 +233,7 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    parser (2.3.0.5)
+    parser (2.3.0.6)
       ast (~> 2.2)
     phantomjs (2.1.1.0)
     poltergeist (1.9.0)
@@ -460,14 +460,14 @@ DEPENDENCIES
   haml-rails
   html2haml
   httparty
-  jbuilder (~> 1.2)
+  jbuilder
   jquery-rails
   jquery.fileupload-rails
   kaminari
   launchy
   letter_opener
   mini_magick
-  mysql2 (~> 0.3.20)
+  mysql2
   nokogiri
   phantomjs
   poltergeist

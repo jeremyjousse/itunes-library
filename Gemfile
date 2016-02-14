@@ -4,7 +4,8 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 
-gem 'mysql2', '~> 0.3.20'
+# gem 'mysql2', '~> 0.3.20'
+gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -50,7 +51,7 @@ gem 'jquery.fileupload-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 # XML parser
 gem 'nokogiri'
@@ -82,8 +83,6 @@ gem 'text'
 
 # Search gem
 gem 'ransack'
-# Used by Ransack and needed for rails 4.1
-# gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 
 gem 'sinatra', require: nil
 
