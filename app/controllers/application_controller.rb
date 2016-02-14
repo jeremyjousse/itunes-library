@@ -62,19 +62,12 @@ class ApplicationController < ActionController::Base
 
       search_params_hash['search'].delete_blank
 
-
-			if !(search_params_hash['search'].to_a - session[:listing_filter_params]['search'].to_a).empty?
-        logger.info "----- --- -- -- - reset page : search"
-        logger.info '----' + search_params_hash['search'].to_a.to_s
-        logger.info '----' + session[:listing_filter_params]['search'].to_a.to_s
-				params_hash['page'] = 1
-			end
-
-      if !params_hash['per_page'].nil?
-        search_params_hash['per_page'] = params_hash['per_page']
-      else
-        search_params_hash['per_page'] = session[:listing_filter_params]['per_page']
+      if !(search_params_hash['search'].to_a - session[:listing_filter_params]['search'].to_a).empty?
+        params_hash['page'] = 1
       end
+
+      search_params_hash['per_page'] = session[:listing_filter_params]['per_page']
+      search_params_hash['per_page'] = params_hash['per_page'] unless params_hash['per_page'].nil?
 
       if !params_hash['page'].nil?
         search_params_hash['page'] = params_hash['page']
@@ -85,8 +78,6 @@ class ApplicationController < ActionController::Base
     end
 
     if search_params_hash['per_page'].to_s != session[:listing_filter_params]['per_page'].to_s
-      logger.info "----- --- -- -- - reset page : per_page"
-      logger.info "---- - - -session[:listing_filter_params]['per_page'] '" + session[:listing_filter_params]['per_page'].to_s + "' --- --- search_params_hash[per_page] '" + search_params_hash['per_page'].to_s + "'"
       search_params_hash['page'] = 1
     end
 
