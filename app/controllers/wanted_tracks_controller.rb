@@ -26,7 +26,7 @@ class WantedTracksController < ApplicationController
     @wanted_track = WantedTrack.find(params[:wanted_track_id])
 
     if params[:download_site] == 'myfreemp3'
-      @url = 'http://www.myfreemp3.biz/mp3/' + ERB::Util.url_encode(@wanted_track.artist.gsub('&', '')) +'%20' + ERB::Util.url_encode(@wanted_track.title)
+      @url = 'http://www.my-free-mp3.com/mp3/' + ERB::Util.url_encode(@wanted_track.artist.gsub('&', '')) +'%20' + ERB::Util.url_encode(@wanted_track.title)
     end
 
     unless @url.nil?
