@@ -77,7 +77,7 @@ class WantedTracksController < ApplicationController
       @import = ResidentAdvisorPlaylist.new
       @import.url = params[:juno_playlist][:url]
       @tracks = @import.parse_top50
-    elsif params[:juno_playlist][:url].index('http://www.residentadvisor.net/dj/') # TODO tranform into regex
+    elsif params[:juno_playlist][:url].index('http://www.residentadvisor.net/dj/') # TODO transform into regex
       @import = ResidentAdvisorPlaylist.new
       @import.url = params[:juno_playlist][:url]
       @tracks = @import.parse_dj_chart
