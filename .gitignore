@@ -73,3 +73,4 @@ vendor/assets/bower_components/angular-bootstrap/bower.json
 vendor/assets/bower_components/angular-bootstrap/.npmignore
 vendor/assets/bower_components/angular-bootstrap/.gitignore
 vendor/assets/bower_components/angular-bootstrap/.bower.json
+.DS_Store
