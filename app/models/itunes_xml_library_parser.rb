@@ -1,14 +1,12 @@
 class ItunesXmlLibraryParser
   include ActiveModel::Validations
   def self.update_library
-    filename = File.expand_path('~/Music/iTunes/iTunes Library.xml')
+    filename = File.expand_path('~/Music/iTunes/iTunes Music Library.xml')
     doc = Nokogiri::XML(File.open(filename, 'r'))
     counter = 0
     imported_files = Array.new
     files_in_itunes_library = doc.xpath('/plist/dict/dict/dict').count
     Rails.logger.info "#{files_in_itunes_library} files in the library"
-
-	#return false
 
 
 	doc.xpath('/plist/dict/dict/dict').each do |node|
