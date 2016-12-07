@@ -42,7 +42,7 @@
               = f.input_field :track_count, class: 'form-control input-sm'
             .col-md-12
               %div#rating{data: {rating: @itunes_track.rating, post:{url: rate_itunes_track_path(@itunes_track)}}}
-
+              = active_rating(@itunes_track.rating, nil).html_safe
               Rating #{@itunes_track.rating}
               %br
 

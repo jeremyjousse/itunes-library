@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.2'
@@ -102,6 +102,9 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
 
+  gem 'scss-lint'
+  gem 'haml-lint'
+
   gem 'binding_of_caller', platforms: [:mri_21]
   gem 'guard-bundler'
   gem 'guard-rails'
@@ -130,6 +133,7 @@ group :development do
 
   gem 'selenium-webdriver'
   gem 'teaspoon'
+
   gem 'phantomjs'
 end
 
