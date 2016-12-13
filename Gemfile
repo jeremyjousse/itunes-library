@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0.1'
 
 # gem 'mysql2', '~> 0.3.20'
 gem 'mysql2'
@@ -84,8 +84,6 @@ gem 'text'
 # Search gem
 gem 'ransack'
 
-gem 'sinatra', require: nil
-
 gem 'active_model_serializers'
 
 gem 'rack-cors', require: 'rack/cors'
@@ -113,7 +111,7 @@ group :development do
   gem 'terminal-notifier-guard'
 
   gem 'html2haml'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 
   gem 'letter_opener'
 

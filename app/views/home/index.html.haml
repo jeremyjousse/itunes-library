@@ -3,7 +3,13 @@
     .col-md-12
       .panel.panel-default
         .panel-body
-          %h1
+          %h2
+            Versions
+          .versions
+            Rails #{@rails_version}
+            %br
+            Ruby #{@ruby_version}
+          %h2
             Rake tasks
           .tasks
             rake itunes_tracks:update_library
