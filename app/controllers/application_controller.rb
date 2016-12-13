@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
     session[:listing_filter_params] = search_params_hash
 
     if search_params_hash['reseted'] == true
-      redirect_to   request.env['PATH_INFO']
+      redirect_to request.env['PATH_INFO']
     end
 
     search_params_hash
