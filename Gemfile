@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.4.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.0.2'
 
 # gem 'mysql2', '~> 0.3.20'
 gem 'mysql2'
@@ -34,9 +34,10 @@ gem 'carrierwave'
 # ImageMagick ruby wraper
 gem 'mini_magick'
 
+gem 'autoprefixer-rails'
+
 # Bootstrap for Sass
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
 
 # Icon Font
 gem 'font-awesome-rails'
@@ -64,6 +65,7 @@ gem 'sidekiq'
 
 # Pagination
 gem 'will_paginate'
+
 gem 'kaminari'
 
 # Mp3 idtag gem
@@ -97,10 +99,11 @@ group :development do
 
   # Remote multi-server automation tool
   gem 'capistrano'
-  gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'capistrano-rails'
 
-  gem 'scss-lint'
+  gem 'scss_lint'
+
   gem 'haml-lint'
 
   gem 'binding_of_caller', platforms: [:mri_21]

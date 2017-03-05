@@ -29,6 +29,10 @@ class WantedTracksController < ApplicationController
       @url = 'http://www.my-free-mp3.com/mp3/' + ERB::Util.url_encode(@wanted_track.artist.gsub('&', '')) +'%20' + ERB::Util.url_encode(@wanted_track.title)
     end
 
+    if params[:download_site] == 'zippyshare'
+      @url = 'http://www.zippysharedjs.com/search/?q=' + ERB::Util.url_encode(@wanted_track.artist.gsub('&', '')) +'%20' + ERB::Util.url_encode(@wanted_track.title)
+    end
+
     unless @url.nil?
       @wanted_track.searched = 1
       @wanted_track.save

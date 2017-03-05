@@ -60,7 +60,7 @@
 									%td #{wanted_track.is_in_library}
 									%td
 										=link_to( image_tag("download_sites/myfreemp3.png"), 'javascript:;', class: 'search_download_file', data: {url: wanted_track_search_file_path(wanted_track, download_site: 'myfreemp3')})
-										=image_tag("download_sites/zippyshare.png")
+										=link_to( image_tag("download_sites/zippyshare.png"), 'javascript:;', class: 'search_download_file', data: {url: wanted_track_search_file_path(wanted_track, download_site: 'zippyshare')})
 										=link_to(image_tag("download_sites/google.png"), 'http://www.google.com/search?q=' + u(wanted_track.artist) + '+' + u(wanted_track.title), target: "_blank")
 									%td
 										=link_to content_tag(:span, "", class: "glyphicon glyphicon-ok") + ' Found', wanted_track_set_found_path(wanted_track),class: "btn btn-success btn-sm"
